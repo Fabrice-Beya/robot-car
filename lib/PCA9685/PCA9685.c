@@ -98,17 +98,34 @@ static void write_duty_cycle(uint8_t led, uint16_t on, uint16_t off) {
     writeByte(LED0_OFF_H + shift, off >> 8);
 }
 
-void SetDutyCycle(uint8_t led, uint16_t percentage) {
-    float constant = (4095 / 100);
+static uint16_t compute_percetage(uint16_t percentage) {
+    float constant = (4095.0f / 100.0f);
     percentage *= constant;
-    write_duty_cycle(led, percentage, 0);
+    return percentage;
 }
 
-void SetLevel(uint8_t channel_num, uint8_t level) {
+void SetDutyCycle(uint8_t led, uint16_t percentage) {
+    uint16_t perc_value = compute_percetage(percentage);
+    write_duty_cycle(led, perc_value, 0);
+}
+
+void SetLevel(uint8_t led, uint8_t level) {
     if (level == 1) {
-        write_duty_cycle(channel_num, 0, 4095);
+        write_duty_cycle(led, 4095, 0);
     } else {
-        write_duty_cycle(channel_num, 0, 0);
+        write_duty_cycle(led, 0, 0);
+    }
+}
+
+void SetInvertedDutyCycles(uint8_t direction, uint8_t led, uint8_t inverted_led, uint16_t percentage) {
+    uint16_t perc_value = compute_percetage(percentage);
+
+    if (direction == 1) {
+        write_duty_cycle(led, perc_value, 0);
+        write_duty_cycle(inverted_led, 0, perc_value);
+    } else {
+        write_duty_cycle(led, 0, perc_value);
+        write_duty_cycle(inverted_led, perc_value, 0);
     }
 }
 
