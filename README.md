@@ -12,7 +12,9 @@ MD - LED10
 This driver can also be used for other use cases besides driving the LED channels above, using the two API functions below:
 
 void SetPwnFrequency(uint32_t freq):
+
 Sets the PWM signal frequency
 
 void SetDutyCycle(uint8_t led, uint16_t percentage):
+
 Set the duty cycle for an led. The channels range from LED0 - LED15.
