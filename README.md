@@ -5,7 +5,7 @@ by waveshare: https://www.waveshare.com/pico-motor-driver.htm
 
 The motors are attached to the following LED channels:
 
-MA1/MA1 - LED1/LED2
+MA1/MA2 - LED1/LED2
 
 MB1/MB2 - LED3/LED4
 
