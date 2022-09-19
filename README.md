@@ -6,8 +6,11 @@ by waveshare: https://www.waveshare.com/pico-motor-driver.htm
 The motors are attached to the following LED channels:
 
 MA1/MA1 - LED1/LED2
+
 MB1/MB2 - LED3/LED4
+
 MC1/MC2 - LED7/LED8
+
 MD1/MD2 - LED9/LED10
 
 This driver can also be used for other use cases besides driving the LED channels above, using the two API functions below:
