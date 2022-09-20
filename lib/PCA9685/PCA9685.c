@@ -122,10 +122,10 @@ void SetInvertedDutyCycles(uint8_t direction, uint8_t led, uint8_t inverted_led,
 
     if (direction == 1) {
         write_duty_cycle(led, perc_value, 0);
-        write_duty_cycle(inverted_led, 0, perc_value);
+        write_duty_cycle(inverted_led, 0, 0);
     } else {
-        write_duty_cycle(led, 0, perc_value);
         write_duty_cycle(inverted_led, perc_value, 0);
+        write_duty_cycle(led, 0, 0);
     }
 }
 

@@ -11,18 +11,11 @@
 # Summary
 ******************************************************************************/
 
-#include "PCA9685.h"
+#include "Car.h"
 #include "pico/stdlib.h"
 
 void Init() {
-    // Initialise PWM controller on ic20
-    PCA9685Init();
-    // Set PWM signal to 100hz
-    SetPwnFrequency(100);
-
-    // Set two led lines with inverter PWM signals
-    SetInvertedDutyCycles(0, LED1, LED2, 60);
-
+   CarInit();
 }
 
 int main(void) {
