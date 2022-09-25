@@ -22,6 +22,7 @@ i2c_inst_t *i2c_handler;
 
 static void reset(void);
 static uint8_t readPrescalar(void);
+static void reset_all_leds();
 
 static void init_i2c() {
     i2c_handler = i2c0;
@@ -98,20 +99,38 @@ static void write_duty_cycle(uint8_t led, uint16_t on, uint16_t off) {
     writeByte(LED0_OFF_H + shift, off >> 8);
 }
 
+static void write_duty_cycle_all(uint16_t on, uint16_t off) {
+    writeByte(ALL_LED_ON_L, on & 0xFF);
+    writeByte(ALL_LED_ON_H, on >> 8);
+    writeByte(ALL_LED_OFF_L, off & 0xFF);
+    writeByte(ALL_LED_OFF_H, off >> 8);
+}
+
 static uint16_t compute_percetage(uint16_t percentage) {
-    float constant = (4095.0f / 100.0f);
-    percentage *= constant;
-    return percentage;
+    if (percentage == 100) { 
+        return 4095;
+    } else if (percentage == 0) {
+        return 0;
+    } else {
+        float constant = (4095.0f / 100.0f);
+        percentage *= constant;
+        return percentage;
+    }
 }
 
 void SetDutyCycle(uint8_t led, uint16_t percentage) {
     uint16_t perc_value = compute_percetage(percentage);
-    write_duty_cycle(led, perc_value, 0);
+    write_duty_cycle(led, 0, perc_value);
+}
+
+void SetDutyCycleAll(uint16_t percentage) {
+    uint16_t perc_value = compute_percetage(percentage);
+    write_duty_cycle_all(0, perc_value);
 }
 
 void SetLevel(uint8_t led, uint8_t level) {
     if (level == 1) {
-        write_duty_cycle(led, 4095, 0);
+        write_duty_cycle(led, 0, 4095);
     } else {
         write_duty_cycle(led, 0, 0);
     }
@@ -121,8 +140,8 @@ void SetInvertedDutyCycles(uint8_t direction, uint8_t led, uint8_t inverted_led,
     uint16_t perc_value = compute_percetage(percentage);
 
     if (direction == 1) {
-        write_duty_cycle(led, perc_value, 0);
-        write_duty_cycle(inverted_led, 0, 0);
+        write_duty_cycle(led, 0, perc_value);
+        // write_duty_cycle(inverted_led, 0, 0);
     } else {
         write_duty_cycle(inverted_led, perc_value, 0);
         write_duty_cycle(led, 0, 0);
@@ -131,11 +150,19 @@ void SetInvertedDutyCycles(uint8_t direction, uint8_t led, uint8_t inverted_led,
 
 static void reset(void) {
     writeByte(MODE1, 0x00);
+    sleep_ms(100);
+    SetDutyCycleAll(0);
 }
 
 static uint8_t readPrescalar(void) {
     uint8_t value;
     readByte(PRESCALAR, &value);
     return value;
+}
+
+static void reset_all_leds() {
+    for(uint8_t i = 0; i < 16; i++) {
+        SetLevel(i, 0);
+    }
 }
 

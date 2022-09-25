@@ -15,13 +15,17 @@
 #include "pico/stdlib.h"
 
 void Init() {
-   CarInit();
+    CarInit();
+
 }
 
 int main(void) {
     Init();
 
     while(true) {
-        
+        Forward(50, 2000);
+        sleep_ms(2000);
+        Backward(50, 2000);
+        sleep_ms(2000);
     }
 }

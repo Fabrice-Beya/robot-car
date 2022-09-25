@@ -71,5 +71,5 @@ void PCA9685Init(void);
 void SetPwnFrequency(uint32_t freq);
 void SetDutyCycle(uint8_t led, uint16_t percentage);
 void SetLevel(uint8_t led, uint8_t level);
-void SetInvertedDutyCycles(uint8_t direction, uint8_t led, uint8_t inverted_led, uint16_t percentage);
+void SetDutyCycleAll(uint16_t percentage);
 #endif

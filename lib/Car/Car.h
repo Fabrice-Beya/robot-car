@@ -22,18 +22,18 @@
 #define TURNING_COEFF       (1 / 4)
 
 struct motor_wheel {
-    uint8_t p_line;
-    uint8_t n_line;
-    uint8_t direction;
-    uint16_t speed;
+    volatile uint8_t led;
+    volatile uint8_t direction;
+    volatile uint16_t speed;
 } typedef motor_wheel;
 
 void CarInit(void);
-void Forward(uint16_t speed, uint8_t runtime);
-void Backward(uint16_t speed, uint8_t runtime);
-void ForwardLeft(uint16_t speed, uint8_t runtime);
-void ForwardRight(uint16_t speed, uint8_t runtime);
-void BackwardLeft(uint16_t speed, uint8_t runtime);
-void BackwardRight(uint16_t speed, uint8_t runtime);
+void Forward(uint16_t speed, uint32_t runtime);
+void Backward(uint16_t speed, uint32_t runtime);
+void ForwardLeft(uint16_t speed, uint32_t runtime);
+void ForwardRight(uint16_t speed, uint32_t runtime);
+void BackwardLeft(uint16_t speed, uint32_t runtime);
+void BackwardRight(uint16_t speed, uint32_t runtime);
+void Stop(void);
 
 #endif
