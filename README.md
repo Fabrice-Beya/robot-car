@@ -5,20 +5,13 @@ by waveshare: https://www.waveshare.com/pico-motor-driver.htm
 
 The motors are attached to the following LED channels:
 
-MA1/MA2 - LED1/LED2
+MA1/MA2 - LED0/LED1/LED2
 
-MB1/MB2 - LED3/LED4
+MB1/MB2 - LED3/LED4/LED5
 
-MC1/MC2 - LED7/LED8
+MC1/MC2 - LED6/LED7/LED8
 
-MD1/MD2 - LED9/LED10
+MD1/MD2 - LED9/LED10/LED11
 
 This driver can also be used for other use cases besides driving the LED channels above, using the two API functions below:
 
-void SetPwnFrequency(uint32_t freq):
-
-Sets the PWM signal frequency
-
-void SetDutyCycle(uint8_t led, uint16_t percentage):
-
-Set the duty cycle for an led. The channels range from LED0 - LED15.
