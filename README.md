@@ -15,5 +15,5 @@ MD1/MD2 - LED9/LED10/LED11
 
 This driver can also be used for other use cases besides driving the LED channels above.
 
-![alt text](https://github.com/Fabrice-Beya/robot-car/blob/main/IMG_4827.HEIC)
+![alt text](https://github.com/Fabrice-Beya/robot-car/blob/main/image_1.jpg)
 
