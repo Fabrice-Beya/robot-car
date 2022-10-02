@@ -14,8 +14,8 @@
 #ifndef _CAR_H_
 #define _CAR_H_
 
-#include "PCA9685.h"
 #include "utils.h"
+#include "PCA9685.h"
 
 #define TURNING_COEFF       (1 / 4)
 

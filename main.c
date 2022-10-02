@@ -13,10 +13,7 @@
 
 #include "Car.h"
 #include "MPU.h"
-#include <FreeRTOS.h>
-#include <task.h>
-#include <queue.h>
-#include "pico/stdlib.h"
+#include "utils.h"
 
 QueueHandle_t CarMessageQueue;
 
@@ -38,6 +35,7 @@ void Init_Queues(void) {
 }
 
 int main(void) {
+    stdio_init_all();
     
     Init_Queues();
 

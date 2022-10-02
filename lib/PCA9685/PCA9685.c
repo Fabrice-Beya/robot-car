@@ -32,7 +32,6 @@ static void init_gpio() {
 }
 
 void PCA9685Init(void) {
-    stdio_init_all();
     init_i2c();
     init_gpio();
     reset();

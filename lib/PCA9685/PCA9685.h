@@ -14,13 +14,7 @@
 #ifndef _PCA9685_H_
 #define _PCA9685_H_
 
-#include "pico/stdlib.h"
-#include "stdio.h"
-#include <stdlib.h> 
-#include <math.h>
-#include <string.h>
-#include "pico/stdlib.h"
-#include "pico/binary_info.h"
+#include "utils.h"
 #include "hardware/i2c.h"
 
 /**

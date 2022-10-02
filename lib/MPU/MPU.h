@@ -14,8 +14,8 @@
 #ifndef _MPU_H_
 #define _MPU_H_
 
-#include "hardware/spi.h"
 #include "utils.h"
+#include "hardware/spi.h"
 
 #define CLK_SPEED           1000*1000
 #define CLK                 6       
