@@ -33,7 +33,7 @@ void MPU_Task(void *pvParameters) {
 void Init_Queues(void) {
     CarMessageQueue = xQueueCreate(5, sizeof(car_message_t));
     if (CarMessageQueue == 0) {
-        printf("Failed to create car message queu.");
+        printf("Failed to create car message queue.");
     }
 }
 
@@ -42,7 +42,7 @@ int main(void) {
     Init_Queues();
 
     xTaskCreate(Car_Task, "Car_Task", 1024, NULL, 1, NULL);
-    xTaskCreate(Car_Task, "MPU_Task", 1024, NULL, 1, NULL);
+    xTaskCreate(MPU_Task, "MPU_Task", 1024, NULL, 1, NULL);
 
     vTaskStartScheduler();
 }
