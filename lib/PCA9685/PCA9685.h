@@ -18,6 +18,10 @@
 #include "stdio.h"
 #include <stdlib.h> 
 #include <math.h>
+#include <string.h>
+#include "pico/stdlib.h"
+#include "pico/binary_info.h"
+#include "hardware/i2c.h"
 
 /**
  * @brief I2C configurations
@@ -72,4 +76,5 @@ void SetPwnFrequency(uint32_t freq);
 void SetDutyCycle(uint8_t led, uint16_t percentage);
 void SetLevel(uint8_t led, uint8_t level);
 void SetDutyCycleAll(uint16_t percentage);
+
 #endif

@@ -12,20 +12,37 @@
 ******************************************************************************/
 
 #include "Car.h"
+#include "MPU.h"
+#include <FreeRTOS.h>
+#include <task.h>
+#include <queue.h>
 #include "pico/stdlib.h"
 
-void Init() {
-    CarInit();
+QueueHandle_t CarMessageQueue;
 
+void Car_Task(void *pvParameters) {
+    CarInit(CarMessageQueue);
+    CarListen();
+}
+
+void MPU_Task(void *pvParameters) {
+    MPUInit(CarMessageQueue);
+    MPUListen();
+}
+
+void Init_Queues(void) {
+    CarMessageQueue = xQueueCreate(5, sizeof(car_message_t));
+    if (CarMessageQueue == 0) {
+        printf("Failed to create car message queu.");
+    }
 }
 
 int main(void) {
-    Init();
+    
+    Init_Queues();
 
-    while(true) {
-        Forward(50, 2000);
-        sleep_ms(2000);
-        Backward(50, 2000);
-        sleep_ms(2000);
-    }
+    xTaskCreate(Car_Task, "Car_Task", 1024, NULL, 1, NULL);
+    xTaskCreate(Car_Task, "MPU_Task", 1024, NULL, 1, NULL);
+
+    vTaskStartScheduler();
 }

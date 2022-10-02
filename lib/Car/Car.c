@@ -18,10 +18,13 @@ motor_wheel front_right;
 motor_wheel back_left;
 motor_wheel back_right;
 
+QueueHandle_t messageQueue;
+
 void update_motors(uint32_t runtime);
 void update_pwm(void);
 
-void CarInit(void) {
+void CarInit(QueueHandle_t _carMessageQueue) {
+    messageQueue = _carMessageQueue;
     PCA9685Init();
     SetPwnFrequency(100);
 
@@ -30,6 +33,36 @@ void CarInit(void) {
     back_left   =   (motor_wheel){ .led = LED6, .direction = FORWARD, .speed = 0  };
     back_right  =   (motor_wheel){ .led = LED9, .direction = FORWARD, .speed = 0 };
 }
+
+static void process_message( car_message_t *car_message) {
+    switch (car_message->direction)
+    {
+        case FORWARD:
+            Forward(car_message->speed, car_message->duration);
+            break;
+        case BACKWARD:
+            Backward(car_message->speed, car_message->duration);
+            break;
+        // TODO: remaining directions....
+        default:
+            break;
+    }
+}
+
+void CarListen(void) {
+    car_message_t car_message;
+    while(true) {
+        if (xQueueReceive(messageQueue, &car_message, portMAX_DELAY) == pdTRUE)
+		{
+			process_message(&car_message);
+		}
+		else
+		{
+			printf("No message received");
+		}
+    }
+}
+
 
 void set_all_motors_speed(uint16_t speed) {
     front_left.speed = speed;
@@ -146,3 +179,4 @@ void ForwardRight(uint16_t speed, uint32_t runtime) {
 
     update_all_motors(runtime);
 }
+

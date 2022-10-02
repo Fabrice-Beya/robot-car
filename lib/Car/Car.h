@@ -15,9 +15,7 @@
 #define _CAR_H_
 
 #include "PCA9685.h"
-
-#define FORWARD             1
-#define BACKWARD            0
+#include "utils.h"
 
 #define TURNING_COEFF       (1 / 4)
 
@@ -27,7 +25,7 @@ struct motor_wheel {
     volatile uint16_t speed;
 } typedef motor_wheel;
 
-void CarInit(void);
+void CarInit(QueueHandle_t _carMessageQueue);
 void Forward(uint16_t speed, uint32_t runtime);
 void Backward(uint16_t speed, uint32_t runtime);
 void ForwardLeft(uint16_t speed, uint32_t runtime);
@@ -35,5 +33,6 @@ void ForwardRight(uint16_t speed, uint32_t runtime);
 void BackwardLeft(uint16_t speed, uint32_t runtime);
 void BackwardRight(uint16_t speed, uint32_t runtime);
 void Stop(void);
+void CarListen(void);
 
 #endif
