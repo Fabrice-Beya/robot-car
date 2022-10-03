@@ -17,7 +17,7 @@ uint8_t response[BUF_LEN], message[BUF_LEN];
 QueueHandle_t carMessageQueue;
 
 static void init_spi(void) {
-    stdio_init_all();
+    
     spi_init(spi0, CLK_SPEED);
     spi_set_slave(spi0, true);
     gpio_set_function(CLK, GPIO_FUNC_SPI);

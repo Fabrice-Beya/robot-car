@@ -5,4 +5,4 @@ include_directories(../Utils)
 
 add_library(Car ${DIR_Car_SRCS})
 
-target_link_libraries(Car PUBLIC PCA9685 pico_stdlib freertos Utils)
+target_link_libraries(Car PUBLIC PCA9685 pico_stdlib Utils)

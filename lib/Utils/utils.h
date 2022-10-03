@@ -21,9 +21,9 @@
 #include <string.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
-#include <FreeRTOS.h>
-#include <task.h>
-#include <queue.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
 
 #define FORWARD             1
 #define BACKWARD            0

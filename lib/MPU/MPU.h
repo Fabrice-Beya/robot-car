@@ -30,7 +30,6 @@
 #define STATUS              0x23
 #define IDLE                0x24
 
-// 4 byte message protocol
 /**
  * @brief 
  * 4 byte message protocol

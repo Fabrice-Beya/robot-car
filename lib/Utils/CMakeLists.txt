@@ -2,4 +2,6 @@ aux_source_directory(. DIR_Utils_SRCS)
 
 add_library(Utils ${DIR_Utils_SRCS})
 
-target_link_libraries(Utils PUBLIC pico_stdlib freertos)
+include_directories(.)
+
+target_link_libraries(Utils PUBLIC main pico_stdlib FreeRTOS-Kernel FreeRTOS-Kernel-Heap4)
