@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.12)
 # Include pico sdk build functions
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
-include (lib/freertos/FreeRTOS_Kernel_import.cmake)
+include (components/freertos/FreeRTOS_Kernel_import.cmake)
 
 # Set the name of the project and c/c++ standards
 project(main C CXX ASM)
@@ -13,18 +13,18 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-add_subdirectory(lib/Utils)
-add_subdirectory(lib/PCA9685)
-add_subdirectory(lib/MPU)
-add_subdirectory(lib/Car)
+add_subdirectory(components/Utils)
+add_subdirectory(components/PCA9685)
+add_subdirectory(components/MPU)
+add_subdirectory(components/Car)
 
-include_directories(./lib/Utils)
-include_directories(./lib/PCA9685)
-include_directories(./lib/MPU)
-include_directories(./lib/Car)
+include_directories(./components/Utils)
+include_directories(./components/PCA9685)
+include_directories(./components/MPU)
+include_directories(./components/Car)
 
 add_executable(main 
-    main.c
+    main/main.c
 )
 
 # enable usb output, disable uart output
