@@ -51,16 +51,16 @@ static void send_car_message(uint8_t *message) {
     }
 }
 
-static void process_message(uint8_t *message) {
-    response[COMMAND]   = message[COMMAND];
-    response[DIRECTION] = message[DIRECTION];
-    response[SPEED]     = message[SPEED];
-    response[DURATION]  = message[DURATION];
+static void process_message(uint8_t *_message) {
+    response[COMMAND]   = _message[COMMAND];
+    response[DIRECTION] = _message[DIRECTION];
+    response[SPEED]     = _message[SPEED];
+    response[DURATION]  = _message[DURATION];
 
     switch (message[COMMAND])
     {
         case MOVE:
-            send_car_message(message);
+            send_car_message(_message);
             break;
         case STATUS:
             // TODO:
@@ -81,7 +81,10 @@ static void process_message(uint8_t *message) {
 
 void MPUListen(void) {
     while(true) {
-        spi_write_read_blocking(spi0, response, message, BUF_LEN);
-        process_message(message);
+        int ret = spi_write_read_blocking(spi0, response, message, BUF_LEN);
+        
+        if (ret) {
+            process_message(message);
+        }
     }
 }

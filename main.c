@@ -22,16 +22,22 @@ void vApplicationIdleHook( void );
 void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
 void vApplicationTickHook( void );
 
+TaskHandle_t MPU_Task_Handle; 
+TaskHandle_t Car_Task_Handle; 
 QueueHandle_t CarMessageQueue;
 
 void Car_Task(void *pvParameters) {
     CarInit(CarMessageQueue);
-    // CarListen();
+    CarListen();
+
+    vTaskDelete(NULL);
 }
 
 void MPU_Task(void *pvParameters) {
     MPUInit(CarMessageQueue);
     MPUListen();
+
+    vTaskDelete(NULL);
 }
 
 void Init_Queues(void) {
@@ -41,23 +47,22 @@ void Init_Queues(void) {
     }
 }
 
-int main(void) {
-    stdio_init_all();
-    
+void Setup_Tasks(void) {
     Init_Queues();
 
-    TaskHandle_t MPU_Task_Handle; 
-    TaskHandle_t Car_Task_Handle; 
-
     xTaskCreate(Car_Task, "Car_Task", 1024, NULL, tskIDLE_PRIORITY, &Car_Task_Handle);
-    xTaskCreate(MPU_Task, "MPU_Task", 1024, NULL, tskIDLE_PRIORITY, &MPU_Task_Handle);
+    xTaskCreate(MPU_Task, "MPU_Task", 4096, NULL, tskIDLE_PRIORITY, &MPU_Task_Handle);
 
     vTaskCoreAffinitySet( MPU_Task_Handle, ( 1 << 0 ) );
     vTaskCoreAffinitySet( Car_Task_Handle, ( 1 << 0 ) );
 
     vTaskStartScheduler();
+}
 
-    while(1){};
+int main(void) {
+    stdio_init_all();
+
+    Setup_Tasks();
 }
 
 void vApplicationMallocFailedHook( void )
