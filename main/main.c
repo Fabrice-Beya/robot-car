@@ -27,14 +27,14 @@ TaskHandle_t Car_Task_Handle;
 QueueHandle_t CarMessageQueue;
 
 void Car_Task(void *pvParameters) {
-    CarInit(CarMessageQueue);
+    Car(CarMessageQueue);
     CarListen();
 
     vTaskDelete(NULL);
 }
 
 void MPU_Task(void *pvParameters) {
-    MPUInit(CarMessageQueue);
+    MPU(CarMessageQueue);
     MPUListen();
 
     vTaskDelete(NULL);

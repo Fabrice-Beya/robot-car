@@ -44,7 +44,7 @@
 #define SPEED               2
 #define DURATION            3
 
-void MPUInit(QueueHandle_t _carMessageQueue);
+void MPU(QueueHandle_t _carMessageQueue);
 void MPUListen(void);
 
 #endif

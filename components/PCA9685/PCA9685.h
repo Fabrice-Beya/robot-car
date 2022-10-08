@@ -65,7 +65,7 @@
 #define LED14                           14
 #define LED15                           15
 
-void PCA9685Init(void);
+void PCA9685(void);
 void SetPwnFrequency(uint32_t freq);
 void SetDutyCycle(uint8_t led, uint16_t percentage);
 void SetLevel(uint8_t led, uint8_t level);

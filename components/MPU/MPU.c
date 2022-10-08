@@ -34,7 +34,7 @@ static void init_response_message(void) {
     response[DURATION]  = 0;    
 }
 
-void MPUInit(QueueHandle_t _carMessageQueue) {
+void MPU(QueueHandle_t _carMessageQueue) {
     carMessageQueue = _carMessageQueue;
     init_spi();
     init_response_message();

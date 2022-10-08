@@ -31,7 +31,7 @@ static void init_gpio() {
     gpio_pull_up(SCL_PIN);
 }
 
-void PCA9685Init(void) {
+void PCA9685(void) {
     init_i2c();
     init_gpio();
     reset();

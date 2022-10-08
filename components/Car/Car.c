@@ -23,9 +23,9 @@ QueueHandle_t messageQueue;
 void update_motors(uint32_t runtime);
 void update_pwm(void);
 
-void CarInit(QueueHandle_t _carMessageQueue) {
+void Car(QueueHandle_t _carMessageQueue) {
     messageQueue = _carMessageQueue;
-    PCA9685Init();
+    PCA9685();
     SetPwnFrequency(100);
 
     front_left  =   (motor_wheel){ .led = LED0, .direction = FORWARD, .speed = 0 };
@@ -64,7 +64,7 @@ void CarListen(void) {
 }
 
 
-void set_all_motors_speed(uint16_t speed) {
+void set_all_motors_speed(uint8_t speed) {
     front_left.speed = speed;
     front_right.speed = speed;
     back_left.speed = speed;
@@ -99,7 +99,7 @@ void update_all(void) {
 void update_all_motors(uint32_t runtime) {
     
     update_all();
-    sleep_ms(runtime);
+    sleep_ms(runtime*1000);
     Stop();
 }
 
@@ -108,7 +108,7 @@ void Stop(void) {
     update_all_motors_speed();
 }
 
-void Backward(uint16_t speed, uint32_t runtime) {
+void Backward(uint8_t speed, uint32_t runtime) {
     front_left.direction = FORWARD;
     front_right.direction = FORWARD;
     back_left.direction = FORWARD;
@@ -118,7 +118,7 @@ void Backward(uint16_t speed, uint32_t runtime) {
     update_all_motors(runtime);
 }
 
-void Forward(uint16_t speed, uint32_t runtime) {
+void Forward(uint8_t speed, uint32_t runtime) {
     front_left.direction = BACKWARD;
     front_right.direction = BACKWARD;
     back_left.direction = BACKWARD;
@@ -128,7 +128,7 @@ void Forward(uint16_t speed, uint32_t runtime) {
     update_all_motors(runtime);
 }
 
-void BackwardLeft(uint16_t speed, uint32_t runtime) {
+void BackwardLeft(uint8_t speed, uint32_t runtime) {
     front_left.direction = FORWARD;
     front_left.speed = speed * TURNING_COEFF;
     front_right.direction = FORWARD;
@@ -141,7 +141,7 @@ void BackwardLeft(uint16_t speed, uint32_t runtime) {
     update_all_motors(runtime);
 }
 
-void BackwarRight(uint16_t speed, uint32_t runtime) {
+void BackwarRight(uint8_t speed, uint32_t runtime) {
     front_left.direction = FORWARD;
     front_left.speed = speed ;
     front_right.direction = FORWARD;
@@ -154,7 +154,7 @@ void BackwarRight(uint16_t speed, uint32_t runtime) {
     update_all_motors(runtime);
 }
 
-void ForwardLeft(uint16_t speed, uint32_t runtime) {
+void ForwardLeft(uint8_t speed, uint32_t runtime) {
     front_left.direction = BACKWARD;
     front_left.speed = speed * TURNING_COEFF;
     front_right.direction = BACKWARD;
@@ -167,7 +167,7 @@ void ForwardLeft(uint16_t speed, uint32_t runtime) {
     update_all_motors(runtime);
 }
 
-void ForwardRight(uint16_t speed, uint32_t runtime) {
+void ForwardRight(uint8_t speed, uint32_t runtime) {
     front_left.direction = BACKWARD;
     front_left.speed = speed ;
     front_right.direction = BACKWARD;
