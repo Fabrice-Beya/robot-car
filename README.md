@@ -12,7 +12,7 @@ Below is a system overview of all the different components and how they interact
 
 ![alt text](https://github.com/Fabrice-Beya/robot-car/blob/0dfa4a569ecc2751b2ae9f7f828b8e67c82686ea/System%20Overview.png)
 
-![alt text]([https://github.com/Fabrice-Beya/robot-car/docs/image_3.jp](https://github.com/Fabrice-Beya/robot-car/blob/main/docs/image_3.jpg)g)
+![alt text](https://github.com/Fabrice-Beya/robot-car/blob/main/docs/image_3.jpg)
 
-![alt text]([https://github.com/Fabrice-Beya/robot-car/docs/image_4.jpg](https://github.com/Fabrice-Beya/robot-car/blob/main/docs/image_4.jpg))
+![alt text](https://github.com/Fabrice-Beya/robot-car/blob/main/docs/image_4.jpg)
 
