@@ -26,7 +26,11 @@
 #include "queue.h"
 
 #define FORWARD             1
-#define BACKWARD            0
+#define BACKWARD            2
+#define FORWARD_LEFT        3
+#define FORWARD_RIGHT       4
+#define BACKWARD_LEFT       5
+#define BACKWARD_RIGHT      6
 
 // Car message struct
 typedef struct {

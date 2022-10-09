@@ -20,6 +20,8 @@ motor_wheel back_right;
 
 QueueHandle_t messageQueue;
 
+static const float TURNING_COEFF = 0.75;
+
 void update_motors(uint32_t runtime);
 void update_pwm(void);
 
@@ -43,7 +45,18 @@ static void process_message( car_message_t *car_message) {
         case BACKWARD:
             Backward(car_message->speed, car_message->duration);
             break;
-        // TODO: remaining directions....
+        case FORWARD_LEFT:
+            ForwardLeft(car_message->speed, car_message->duration);
+            break;
+        case FORWARD_RIGHT:
+            ForwardRight(car_message->speed, car_message->duration);
+            break;
+        case BACKWARD_LEFT:
+            BackwardLeft(car_message->speed, car_message->duration);
+            break;
+        case BACKWARD_RIGHT:
+            BackwardRight(car_message->speed, car_message->duration);
+            break;
         default:
             break;
     }
@@ -62,7 +75,6 @@ void CarListen(void) {
 		}
     }
 }
-
 
 void set_all_motors_speed(uint8_t speed) {
     front_left.speed = speed;
@@ -96,7 +108,7 @@ void update_all(void) {
     update_motor(&back_right);
 }
 
-void update_all_motors(uint32_t runtime) {
+void update_all_motors(uint8_t runtime) {
     
     update_all();
     sleep_ms(runtime*1000);
@@ -108,7 +120,7 @@ void Stop(void) {
     update_all_motors_speed();
 }
 
-void Backward(uint8_t speed, uint32_t runtime) {
+void Forward(uint8_t speed, uint8_t runtime) {
     front_left.direction = FORWARD;
     front_right.direction = FORWARD;
     back_left.direction = FORWARD;
@@ -118,7 +130,7 @@ void Backward(uint8_t speed, uint32_t runtime) {
     update_all_motors(runtime);
 }
 
-void Forward(uint8_t speed, uint32_t runtime) {
+void Backward(uint8_t speed, uint8_t runtime) {
     front_left.direction = BACKWARD;
     front_right.direction = BACKWARD;
     back_left.direction = BACKWARD;
@@ -128,55 +140,58 @@ void Forward(uint8_t speed, uint32_t runtime) {
     update_all_motors(runtime);
 }
 
-void BackwardLeft(uint8_t speed, uint32_t runtime) {
+void ForwardLeft(uint8_t speed, uint8_t runtime) {
+    uint8_t differential_speed = (uint8_t)floor(speed * TURNING_COEFF);
     front_left.direction = FORWARD;
-    front_left.speed = speed * TURNING_COEFF;
+    front_left.speed = differential_speed;
     front_right.direction = FORWARD;
     front_right.speed = speed;
     back_left.direction = FORWARD;
-    back_left.speed = speed * TURNING_COEFF;
+    back_left.speed = differential_speed;
     back_right.direction = FORWARD;
     back_right.speed = speed;
 
     update_all_motors(runtime);
 }
 
-void BackwarRight(uint8_t speed, uint32_t runtime) {
+void ForwardRight(uint8_t speed, uint8_t runtime) {
+    uint8_t differential_speed = (uint8_t)floor(speed * TURNING_COEFF);
     front_left.direction = FORWARD;
     front_left.speed = speed ;
     front_right.direction = FORWARD;
-    front_right.speed = speed * TURNING_COEFF;
+    front_right.speed = differential_speed;
     back_left.direction = FORWARD;
     back_left.speed = speed;
     back_right.direction = FORWARD;
-    back_right.speed = speed * TURNING_COEFF;
+    back_right.speed = differential_speed;
 
     update_all_motors(runtime);
 }
 
-void ForwardLeft(uint8_t speed, uint32_t runtime) {
+void BackwardLeft(uint8_t speed, uint8_t runtime) {
+    uint8_t differential_speed = (uint8_t)floor(speed * TURNING_COEFF);
     front_left.direction = BACKWARD;
-    front_left.speed = speed * TURNING_COEFF;
+    front_left.speed = differential_speed;
     front_right.direction = BACKWARD;
     front_right.speed = speed;
     back_left.direction = BACKWARD;
-    back_left.speed = speed * TURNING_COEFF;
+    back_left.speed = differential_speed;
     back_right.direction = BACKWARD;
     back_right.speed = speed;
 
     update_all_motors(runtime);
 }
 
-void ForwardRight(uint8_t speed, uint32_t runtime) {
+void BackwardRight(uint8_t speed, uint8_t runtime) {
+    uint8_t differential_speed = (uint8_t)floor(speed * TURNING_COEFF);
     front_left.direction = BACKWARD;
     front_left.speed = speed ;
     front_right.direction = BACKWARD;
-    front_right.speed = speed * TURNING_COEFF;
+    front_right.speed = differential_speed;
     back_left.direction = BACKWARD;
     back_left.speed = speed;
     back_right.direction = BACKWARD;
-    back_right.speed = speed * TURNING_COEFF;
+    back_right.speed = differential_speed;
 
     update_all_motors(runtime);
 }
-

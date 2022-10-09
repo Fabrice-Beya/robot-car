@@ -24,11 +24,11 @@
 #define CS                  5
 
 // Commands
-#define MOVE                0x20
-#define SLEEP               0x21
-#define REBOOT              0x22
-#define STATUS              0x23
-#define IDLE                0x24
+#define MOVE                1
+#define SLEEP               2
+#define REBOOT              3
+#define STATUS              4
+#define IDLE                5
 
 /**
  * @brief 
