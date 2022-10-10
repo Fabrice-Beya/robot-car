@@ -5,3 +5,4 @@
 [submodule "raspberrypi/mpu"]
 	path = raspberrypi/mpu
 	url = https://github.com/Fabrice-Beya/mpu.git
+	branch = main
