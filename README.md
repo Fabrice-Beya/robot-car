@@ -1,6 +1,6 @@
 # robot-car
 
-A a mobile robot system using Raspberry Pi 2 as MPU(Main Processing Unit), Raspberry Pi pico as Slave motion controller, MPU6050 for motion tracking and PCA9685 for PWM motor control.
+A mobile robot system using Raspberry Pi 2 as MPU(Main Processing Unit), Raspberry Pi pico as Slave motion controller, MPU6050 for motion tracking and PCA9685 for PWM motor control.
 
 https://user-images.githubusercontent.com/18543570/194754095-052a0ec9-075b-41be-82cb-38d5c968d773.mov
 
@@ -26,6 +26,6 @@ TODO:
 1. Update the MPU6050 IMU drivers 
 2. Add localisation functionalities leverage the IMU.
 3. Integration time of flight sensors to detect obstacles
-4. Integration a camera.
-5. Implement autonomous driving system that avoids collision and detects objects of interest.
+4. Introduce a camera, implement assocated drivers, and integrate it into existing app.
+5. Implement autonomous driving system library that avoids collisions and detects objects of interest.
 
